@@ -3,20 +3,7 @@ import React, { useState } from "react";
 import { getRandomColors } from "../../helpers/getRandomColors";
 import { v4 as uuidv4 } from "uuid";
 
-interface Tag {
-	title: string;
-	bg: string;
-	text: string;
-}
-
-interface AddModalProps {
-	isOpen: boolean;
-	onClose: () => void;
-	setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	handleAddTask: (taskData: any) => void;
-}
-
-const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) => {
+const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }) => {
 	const initialTaskData = {
 		id: uuidv4(),
 		title: "",
@@ -25,25 +12,23 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
 		deadline: 0,
 		image: "",
 		alt: "",
-		tags: [] as Tag[],
+		tags: [],
 	};
 
 	const [taskData, setTaskData] = useState(initialTaskData);
 	const [tagTitle, setTagTitle] = useState("");
 
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-	) => {
+	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setTaskData({ ...taskData, [name]: value });
 	};
 
-	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleImageChange = (e) => {
 		if (e.target.files && e.target.files[0]) {
 			const reader = new FileReader();
 			reader.onload = function (e) {
 				if (e.target) {
-					setTaskData({ ...taskData, image: e.target.result as string });
+					setTaskData({ ...taskData, image: e.target.result });
 				}
 			};
 			reader.readAsDataURL(e.target.files[0]);
@@ -53,7 +38,7 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
 	const handleAddTag = () => {
 		if (tagTitle.trim() !== "") {
 			const { bg, text } = getRandomColors();
-			const newTag: Tag = { title: tagTitle.trim(), bg, text };
+			const newTag = { title: tagTitle.trim(), bg, text };
 			setTaskData({ ...taskData, tags: [...taskData.tags, newTag] });
 			setTagTitle("");
 		}
@@ -74,8 +59,7 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
 		<div
 			className={`w-screen h-screen place-items-center fixed top-0 left-0 ${
 				isOpen ? "grid" : "hidden"
-			}`}
-		>
+			}`}>
 			<div
 				className="w-full h-full bg-black opacity-70 absolute left-0 top-0 z-20"
 				onClick={closeModal}
@@ -130,7 +114,7 @@ const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }: AddModalProps) =>
 					Add Tag
 				</button>
 				<div className="w-full">
-					{taskData.tags && <span>Tags:</span>}
+					{taskData.tags.length > 0 && <span>Tags:</span>}
 					{taskData.tags.map((tag, index) => (
 						<div
 							key={index}

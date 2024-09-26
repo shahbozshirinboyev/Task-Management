@@ -1,13 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TimeOutline } from "react-ionicons";
-import { TaskT } from "../../types";
 
-interface TaskProps {
-	task: TaskT;
-	provided: any;
-}
-
-const Task = ({ task, provided }: TaskProps) => {
+const Task = ({ task, provided }) => {
 	const { title, description, priority, deadline, image, alt, tags } = task;
 
 	return (
@@ -42,11 +36,7 @@ const Task = ({ task, provided }: TaskProps) => {
 			<div className="w-full border border-dashed"></div>
 			<div className="w-full flex items-center justify-between">
 				<div className="flex items-center gap-1">
-					<TimeOutline
-						color={"#666"}
-						width="19px"
-						height="19px"
-					/>
+					<i className="bi bi-clock"></i>
 					<span className="text-[13px] text-gray-700">{deadline} mins</span>
 				</div>
 				<div

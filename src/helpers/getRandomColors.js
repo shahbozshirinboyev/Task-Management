@@ -1,9 +1,4 @@
-interface Color {
-	bg: string;
-	text: string;
-}
-
-const colors: { [key: string]: Color } = {
+const colors = {
 	red: { bg: "#fee2e2", text: "#dc2626" },
 	rose: { bg: "#ffe4e6", text: "#e11d48" },
 	blue: { bg: "#dbeafe", text: "#2563eb" },
@@ -14,7 +9,7 @@ const colors: { [key: string]: Color } = {
 	amber: { bg: "#fef3c7", text: "#d97706" },
 };
 
-export const getRandomColors = (): Color => {
+export const getRandomColors = () => {
 	const keys = Object.keys(colors);
 	const randomKey = keys[Math.floor(Math.random() * keys.length)];
 	return colors[randomKey];

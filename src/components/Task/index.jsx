@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TimeOutline } from "react-ionicons";
 
 const Task = ({ task, provided }) => {
+
 	const { title, description, priority, deadline, image, alt, tags } = task;
 
 	return (
@@ -22,7 +22,7 @@ const Task = ({ task, provided }) => {
 				{tags.map((tag) => (
 					<span
 						key={tag.title}
-						className="px-[10px] py-[2px] text-[13px] font-medium rounded-md"
+						className="px-[10px] py-[2px] text-[13px] font-semibold rounded-md"
 						style={{ backgroundColor: tag.bg, color: tag.text }}
 					>
 						{tag.title}

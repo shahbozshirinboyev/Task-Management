@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { getRandomColors } from "../../helpers/getRandomColors";
 import { v4 as uuidv4 } from "uuid";
 
 const AddModal = ({ isOpen, onClose, setOpen, handleAddTask }) => {

@@ -4,8 +4,6 @@
 // npm install @hello-pangea/dnd
 
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-
-
 import { useState } from "react";
 import { Board } from "../../data/board";
 import { onDragEnd } from "../../helpers/onDragEnd";
@@ -33,12 +31,11 @@ function Home() {
 
   return (
     <>
-      <DragDropContext
-        onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-      >
-        <div className="w-full flex items-start justify-between px-5 pb-8">
+      <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
+        <div className="w-full flex items-start justify-between px-5 bg-green-200">
+
           {Object.entries(columns).map(([columnId, column]) => (
-            <div className="w-full flex flex-col gap-0" key={columnId}>
+            <div className="flex flex-col gap-2" key={columnId}>
               <Droppable droppableId={columnId} key={columnId}>
                 {(provided) => (
                   <div
@@ -57,10 +54,7 @@ function Home() {
                       Add Task
                     </div>
                     {column.items.map((task, index) => (
-                      <Draggable
-                        key={task.id.toString()}
-                        draggableId={task.id.toString()}
-                        index={index}
+                      <Draggable key={task.id.toString()} draggableId={task.id.toString()} index={index}
                       >
                         {(provided) => (
                           <>
@@ -75,6 +69,7 @@ function Home() {
               </Droppable>
             </div>
           ))}
+
         </div>
       </DragDropContext>
 
